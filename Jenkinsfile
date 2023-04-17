@@ -10,7 +10,7 @@ pipeline{
         APP_NAME = "complete-prodcution-e2e-pipeline"
         RELEASE = "1.0.0"
         DOCKER_USER = "smartcloud2022"
-        DOCKER_PASS = 'dockerpass'
+        DOCKER_PASS = 'dockerhub'
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
         // JENKINS_API_TOKEN = credentials('JENKINS_API_TOKEN')
@@ -62,8 +62,9 @@ pipeline{
 
     stage("Build & push Docker Image"){
             steps{
+                withCredentials([string(credentialsId: 'dockerpass', variable: 'dockerpass')]) {
                 script {
-                    sh 'sudo docker login -u  smartcloud2022 -p futumans@123ABC'
+                    sh 'sudo docker login -u  $DOCKER_USER -p $dockerpass'
                     docker.withRegistry('',DOCKER_PASS)   {
                         docker_image = docker.build "${IMAGE_NAME}"
                     }
@@ -73,6 +74,8 @@ pipeline{
 
                     }
                     }
+                }
+
         }
     }
 }
