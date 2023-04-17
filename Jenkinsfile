@@ -64,8 +64,8 @@ pipeline{
                 script(sandbox:false) {
                     
                     docker.withRegistry('',DOCKER_PASS)   {
-                        def docker_image = docker.build "${IMAGE_NAME}"
-                        docker.push()
+                        docker_image = docker.build "${IMAGE_NAME}"
+                        //docker.push()
                       //  docker.push("latest")
                     }
 
