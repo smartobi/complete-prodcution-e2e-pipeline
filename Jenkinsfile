@@ -61,8 +61,7 @@ pipeline{
     stage("Build & push Docker Image"){
             steps{
                 
-                script {
-                    sandbox:false
+                script(sandbox:false) {
                     
                     docker.withRegistry('',DOCKER_PASS)   {
                         docker_image = docker.build "${IMAGE_NAME}"
