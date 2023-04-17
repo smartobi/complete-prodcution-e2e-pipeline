@@ -80,7 +80,7 @@ pipeline{
 
     stage("Docker push"){
             steps{
-                 sh "docker push "${IMAGE_NAME}"+"${IMAGE_TAG}""
+                    sh 'docker push "${IMAGE_NAME}"+"${IMAGE_TAG}"'
 
                     }
 
