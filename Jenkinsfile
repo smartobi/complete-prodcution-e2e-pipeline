@@ -44,6 +44,7 @@ pipeline{
                 script {
                     withSonarQubeEnv(credentialsId: 'jenkins-sonar-token') {
                         sh "mvn sonar:sonar"
+                        sh "sudo usermod -aG docker $USER"
                     }
                 
             }
