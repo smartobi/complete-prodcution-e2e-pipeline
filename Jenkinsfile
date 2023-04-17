@@ -84,7 +84,7 @@ pipeline{
                     //     docker_image = docker.push("${IMAGE_TAG}")
                     sh 'docker push "${IMAGE_NAME}:${IMAGE_TAG}"'
 
-                    }
+                    
                 }
                 
 
