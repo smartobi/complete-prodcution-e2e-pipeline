@@ -12,7 +12,7 @@ pipeline{
         DOCKER_USER = "smartcloud2022"
         DOCKER_PASS = 'dockerhub'
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
-        IMAGE_TAG = "${RELEASE}${BUILD_NUMBER}"
+        IMAGE_TAG = "${RELEASE}.${BUILD_NUMBER}"
         // JENKINS_API_TOKEN = credentials('JENKINS_API_TOKEN')
     }
     stages{
@@ -80,12 +80,12 @@ pipeline{
     stage("Docker push"){
             steps{
                 script {
-                    // docker.withRegistry('',DOCKER_PASS)  {
-                    //     docker_image = docker.push("${IMAGE_TAG}")
-                    sh 'docker image tag "${IMAGE_NAME}"  "${IMAGE_NAME}:${IMAGE_TAG}"'
+                    docker.withRegistry('',DOCKER_PASS)  {
+                        docker_image = docker.push("${IMAGE_TAG}")
+                    // sh 'docker image tag "${IMAGE_NAME}"  "${IMAGE_NAME}:${IMAGE_TAG}"'
                     // sh 'docker push "${IMAGE_NAME}:${IMAGE_TAG}"'
                     
-                    
+                    }
                 }
                 
 
