@@ -65,7 +65,6 @@ pipeline{
                     
                     docker.withRegistry('',DOCKER_PASS)   {
                         docker_image = docker.build "${IMAGE_NAME}"
-                        docker_image = docker.push("${IMAGE_TAG}")
                     sh 'echo "========================completed now building image========================"'
                         //docker.push()
                       //  docker.push("latest")
@@ -78,23 +77,23 @@ pipeline{
         }
     }
 
-    // stage("Docker push"){
-    //         steps{
-    //             script {
-    //                 docker.withRegistry('',DOCKER_PASS)  {
-    //                     docker_image = docker.push("${IMAGE_TAG}")
-    //                 // sh 'docker image tag "${IMAGE_NAME}"  "${IMAGE_NAME}:${IMAGE_TAG}"'
-    //                 // sh 'docker push "${IMAGE_NAME}:${IMAGE_TAG}"'
+    stage("Docker push"){
+            steps{
+                script {
+                    // docker.withRegistry('',DOCKER_PASS)  {
+                    //     docker_image = docker.push("${IMAGE_TAG}")
+                    sh 'docker image tag "${IMAGE_NAME}"  "${IMAGE_NAME}:${IMAGE_TAG}"'
+                    sh 'docker push "${IMAGE_NAME}:${IMAGE_TAG}"'
                     
-    //                 }
-    //             }
+                    
+                }
                 
 
 
 
-    //             }
+                }
 
-    //     }
+        }
 }
 }
 
