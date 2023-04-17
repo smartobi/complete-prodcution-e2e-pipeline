@@ -80,12 +80,12 @@ pipeline{
     stage("Docker push"){
             steps{
                 script {
-                    docker.withRegistry('',DOCKER_PASS)  {
-                        docker_image = docker.push("${IMAGE_TAG}")
-                    // sh 'docker image -t "${IMAGE_NAME}"  "${IMAGE_NAME}:${IMAGE_TAG}"'
-                    //sh 'docker push "${IMAGE_NAME}:${IMAGE_TAG}"'
+                    // docker.withRegistry('',DOCKER_PASS)  {
+                    //     docker_image = docker.push("${IMAGE_TAG}")
+                    sh 'docker image tag "${IMAGE_NAME}"  "${IMAGE_NAME}:${IMAGE_TAG}"'
+                    // sh 'docker push "${IMAGE_NAME}:${IMAGE_TAG}"'
                     
-                    }
+                    
                 }
                 
 
