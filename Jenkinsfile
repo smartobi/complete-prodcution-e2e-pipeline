@@ -63,6 +63,7 @@ pipeline{
     stage("Build & push Docker Image"){
             steps{
                 script {
+                    sh 'sudo docker login -u  $DOCKER_USER -p $DOCKER_PASS'
                     docker.withRegistry('',DOCKER_PASS)   {
                         docker_image = docker.build "${IMAGE_NAME}"
                     }
