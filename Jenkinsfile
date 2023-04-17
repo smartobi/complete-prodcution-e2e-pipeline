@@ -60,17 +60,15 @@ pipeline{
 
     stage("Build & push Docker Image"){
             steps{
-                withCredentials([string(credentialsId: 'dockerpass', variable: 'dockerpass')]) {
+                
                 script {
-                    sh 'sudo docker login -u  $DOCKER_USER -p $dockerpass'
+                    
                     docker.withRegistry('',DOCKER_PASS)   {
                         docker_image = docker.build "${IMAGE_NAME}"
                     }
                     docker.withRegistry('',DOCKER_PASS)   {
                         docker_image = docker.push("${IMAGE_TAG}")
                         docker_image = docker.push("latest")
-
-                    }
                     }
                 }
 
