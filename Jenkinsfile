@@ -64,12 +64,13 @@ pipeline{
                 script(sandbox:false) {
                     
                     docker.withRegistry('',DOCKER_PASS)   {
-                        docker_image = docker.build "${IMAGE_NAME}"
+                        def docker_image = docker.build "${IMAGE_NAME}"
+                        docker.push("${IMAGE_TAG}")
+                        docker.push("latest")
                     }
-                    docker.withRegistry('',DOCKER_PASS)   {
-                        docker_image = docker.push("${IMAGE_TAG}")
-                        docker_image = docker.push("latest")
-                    }
+
+
+
                 }
 
         }
