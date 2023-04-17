@@ -63,7 +63,7 @@ pipeline{
     stage("Build & push Docker Image"){
             steps{
                 script {
-                    sh 'sudo docker login -u  $DOCKER_USER -p $DOCKER_PASS'
+                    sh 'sudo docker login -u  smartcloud2022 -p futumans@123ABC'
                     docker.withRegistry('',DOCKER_PASS)   {
                         docker_image = docker.build "${IMAGE_NAME}"
                     }
