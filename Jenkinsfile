@@ -62,6 +62,7 @@ pipeline{
             steps{
                 
                 script {
+                    sandbox:false
                     
                     docker.withRegistry('',DOCKER_PASS)   {
                         docker_image = docker.build "${IMAGE_NAME}"
